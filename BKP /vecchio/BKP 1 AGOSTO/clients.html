@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elenco Clienti</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-6xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex items-center">
+                <h1 class="text-3xl font-bold text-gray-800">Elenco Clienti</h1>
+            </div>
+            <div class="flex space-x-4">
+                <!-- Nuovo pulsante per tornare alla homepage -->
+                <a href="{{ url_for('index') }}" class="bg-gray-200 text-gray-700 font-semibold py-2 px-4 rounded-full shadow-md hover:bg-gray-300 transition-colors duration-200 flex items-center">
+                    <i class="fas fa-home mr-2"></i> Torna alla Home
+                </a>
+                <a href="{{ url_for('add_client') }}" class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full shadow-md hover:bg-indigo-700 transition-colors duration-200 flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Aggiungi Cliente
+                </a>
+            </div>
+        </div>
+        <div class="overflow-x-auto">
+            <table class="min-w-full bg-white rounded-lg shadow-sm border border-gray-200">
+                <thead class="bg-gray-100 border-b border-gray-200">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nome</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefono</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Partita IVA</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Indirizzo</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Città</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">CAP</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Codice SDI</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Agente</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Call Center</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Referente</th>
+                        <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Azioni</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                    {% for client in clients %}
+                    <tr>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ client.nome }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.email }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.telefono }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.partita_iva }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.indirizzo }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.citta }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.cap }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.codice_sdi }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.agente }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.call_center }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ client.referente_aziendale }}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                            <a href="{{ url_for('edit_client', client_id=client.id) }}" class="text-indigo-600 hover:text-indigo-800 mr-4 transition-colors duration-200" title="Modifica">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a href="{{ url_for('delete_client', client_id=client.id) }}" class="text-red-600 hover:text-red-800 transition-colors duration-200" title="Elimina" onclick="return confirm('Sei sicuro di voler eliminare questo cliente?');">
+                                <i class="fas fa-trash-alt"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="12" class="px-6 py-4 text-center text-sm text-gray-500">Nessun cliente trovato.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

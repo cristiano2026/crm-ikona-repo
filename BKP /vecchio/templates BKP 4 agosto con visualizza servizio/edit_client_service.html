@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifica Servizio</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-lg transform transition-all duration-300 hover:shadow-3xl">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Modifica Servizio per {{ client.name }}</h1>
+        <form method="post" action="{{ url_for('edit_client_service', client_id=client.id, client_service_id=client_service.id) }}" class="space-y-6">
+            <div>
+                <label for="service_id" class="block text-sm font-medium text-gray-700">Servizio</label>
+                <select id="service_id" name="service_id" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                    {% for service in available_services %}
+                    <option value="{{ service.id }}" {% if service.id == client_service.service_id %}selected{% endif %}>{{ service.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div>
+                <label for="subscribed_price" class="block text-sm font-medium text-gray-700">Prezzo Sottoscritto</label>
+                <input type="number" step="0.01" id="subscribed_price" name="subscribed_price" value="{{ client_service.subscribed_price }}" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label for="start_date" class="block text-sm font-medium text-gray-700">Data di Inizio</label>
+                    <input type="date" id="start_date" name="start_date" value="{{ client_service.start_date.strftime('%Y-%m-%d') }}" required class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                </div>
+                <div>
+                    <label for="end_date" class="block text-sm font-medium text-gray-700">Data di Fine (Opzionale)</label>
+                    <input type="date" id="end_date" name="end_date" value="{{ client_service.end_date.strftime('%Y-%m-%d') if client_service.end_date else '' }}" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">
+                </div>
+            </div>
+            <div>
+                <label for="notes" class="block text-sm font-medium text-gray-700">Note (Opzionale)</label>
+                <textarea id="notes" name="notes" rows="4" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200">{{ client_service.notes }}</textarea>
+            </div>
+            <div class="flex justify-between items-center">
+                <a href="{{ url_for('show_client', client_id=client.id) }}" class="text-gray-600 hover:text-gray-800 transition-colors duration-200">
+                    Annulla
+                </a>
+                <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-200 shadow-lg">
+                    Salva Modifiche
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

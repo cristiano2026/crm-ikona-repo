@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Cliente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
+    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body class="p-8 bg-gray-100">
+    <div class="max-w-3xl mx-auto bg-white p-8 rounded-xl shadow-lg">
+        <div class="flex justify-between items-center mb-6">
+            <a href="{{ url_for('show_clients') }}" class="text-indigo-600 hover:text-indigo-800 transition-colors duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>Torna alla lista clienti
+            </a>
+            <a href="{{ url_for('edit_client', client_id=client.id) }}" class="bg-yellow-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-yellow-600 transition-colors duration-200">
+                <i class="fas fa-edit mr-2"></i>Modifica
+            </a>
+        </div>
+        
+        <h1 class="text-4xl font-bold text-gray-800 mb-6 text-center">Dettagli Cliente</h1>
+
+        <!-- Dettagli del cliente -->
+        <div class="bg-indigo-50 p-6 rounded-lg shadow-inner mb-6">
+            <h2 class="text-2xl font-semibold text-indigo-800 mb-4">Informazioni Personali</h2>
+            <div class="space-y-3 text-gray-700">
+                <p><strong>Nome:</strong> {{ client['nome'] }}</p>
+                <p><strong>Cognome:</strong> {{ client['cognome'] }}</p>
+                <p><strong>Email:</strong> {{ client['email'] }}</p>
+                <p><strong>Telefono:</strong> {{ client['telefono'] }}</p>
+                <p><strong>Partita IVA:</strong> {{ client['partita_iva'] }}</p>
+                <p><strong>Codice SDI:</strong> {{ client['codice_sdi'] }}</p>
+                <p><strong>Persona di Riferimento:</strong> {{ client['persona_riferimento'] }}</p>
+                <p><strong>Agente:</strong> {{ client['agente'] }}</p>
+                <p><strong>Call Center:</strong> {{ client['call_center'] }}</p>
+            </div>
+        </div>
+
+        <!-- Placeholder per i servizi -->
+        <div class="bg-gray-100 p-6 rounded-lg shadow-inner">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-4">Servizi Acquistati</h2>
+            <p class="text-gray-600 italic">
+                Questa sezione è in fase di sviluppo. I servizi acquistati dal cliente verranno mostrati qui.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conferma Eliminazione</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-md mx-auto bg-white p-6 rounded-xl shadow-lg text-center">
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded-lg" role="alert">
+            <p class="font-bold">Attenzione!</p>
+            <p>Sei sicuro di voler eliminare il servizio "{{ service.name }}"?</p>
+            <p class="text-sm mt-2">Questa operazione non può essere annullata.</p>
+        </div>
+        
+        <form action="{{ url_for('delete_service', service_id=service.id) }}" method="POST" class="inline-block">
+            <!-- Pulsante per confermare l'eliminazione -->
+            <button type="submit" class="bg-red-600 text-white font-bold py-2 px-6 rounded-lg shadow-md hover:bg-red-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-500">
+                <i class="fas fa-trash-alt mr-2"></i> Sì, Elimina
+            </button>
+        </form>
+        
+        <!-- Link per annullare e tornare indietro -->
+        <a href="{{ url_for('show_services') }}" class="inline-block mt-4 text-gray-500 hover:text-gray-700 ml-4">
+            <i class="fas fa-arrow-left mr-2"></i> Annulla
+        </a>
+    </div>
+</body>
+</html>

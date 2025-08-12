@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggiungi Collaboratore</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    
+    <div class="w-full max-w-2xl bg-white rounded-xl shadow-lg p-6 md:p-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6">
+            <h1 class="text-2xl font-bold text-gray-800 mb-4 md:mb-0">Aggiungi un nuovo Collaboratore</h1>
+        </div>
+        
+        <!-- Form -->
+        <form action="{{ url_for('add_collaborator') }}" method="POST" class="space-y-6">
+            
+            <!-- Campo Nome -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700">Nome <span class="text-red-500">*</span></label>
+                <div class="mt-1">
+                    <input type="text" name="name" id="name" required
+                           class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                </div>
+            </div>
+
+            <!-- Campo Ruolo -->
+            <div>
+                <label for="role" class="block text-sm font-medium text-gray-700">Ruolo</label>
+                <div class="mt-1">
+                    <input type="text" name="role" id="role"
+                           class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                </div>
+            </div>
+
+            <!-- Campo Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                <div class="mt-1">
+                    <input type="email" name="email" id="email"
+                           class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                </div>
+            </div>
+            
+            <!-- Campo Telefono -->
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Telefono</label>
+                <div class="mt-1">
+                    <input type="tel" name="phone" id="phone"
+                           class="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                </div>
+            </div>
+
+            <!-- Bottoni di azione -->
+            <div class="flex justify-end space-x-4 mt-6">
+                <a href="{{ url_for('show_collaborators') }}" class="py-2 px-4 text-sm font-medium text-gray-700 bg-gray-200 rounded-xl hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400">
+                    Annulla
+                </a>
+                <button type="submit" class="py-2 px-4 text-sm font-medium text-white bg-blue-600 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                    Salva Collaboratore
+                </button>
+            </div>
+        </form>
+        
+    </div>
+
+</body>
+</html>

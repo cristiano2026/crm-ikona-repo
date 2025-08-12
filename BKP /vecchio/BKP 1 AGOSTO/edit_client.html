@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Cliente</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="p-8">
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-2xl p-8 border border-gray-200">
+        <a href="{{ url_for('clients_list') }}" class="text-gray-600 hover:text-indigo-600 mb-6 block font-semibold transition-colors duration-200">
+            <i class="fas fa-arrow-left mr-2"></i> Torna alla lista
+        </a>
+        <h1 class="text-3xl font-bold text-gray-800 mb-6">Modifica cliente: {{ client.nome }}</h1>
+        <form action="{{ url_for('edit_client', client_id=client.id) }}" method="post" class="space-y-6">
+            <!-- Campi standard -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="nome" class="block text-sm font-medium text-gray-700 mb-1">Nome / Ragione Sociale</label>
+                    <input type="text" id="nome" name="nome" value="{{ client.nome }}" required
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                    <input type="email" id="email" name="email" value="{{ client.email }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="telefono" class="block text-sm font-medium text-gray-700 mb-1">Telefono</label>
+                    <input type="tel" id="telefono" name="telefono" value="{{ client.telefono }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="partita_iva" class="block text-sm font-medium text-gray-700 mb-1">Partita IVA</label>
+                    <input type="text" id="partita_iva" name="partita_iva" value="{{ client.partita_iva }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+            </div>
+
+            <!-- Dati Indirizzo -->
+            <div>
+                <label for="indirizzo" class="block text-sm font-medium text-gray-700 mb-1">Indirizzo</label>
+                <input type="text" id="indirizzo" name="indirizzo" value="{{ client.indirizzo }}"
+                       class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div>
+                    <label for="citta" class="block text-sm font-medium text-gray-700 mb-1">Città</label>
+                    <input type="text" id="citta" name="citta" value="{{ client.citta }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="cap" class="block text-sm font-medium text-gray-700 mb-1">CAP</label>
+                    <input type="text" id="cap" name="cap" value="{{ client.cap }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+            </div>
+            
+            <!-- Dati Fiscali e Referenti -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label for="codice_sdi" class="block text-sm font-medium text-gray-700 mb-1">Codice SDI</label>
+                    <input type="text" id="codice_sdi" name="codice_sdi" value="{{ client.codice_sdi }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="agente" class="block text-sm font-medium text-gray-700 mb-1">Agente</label>
+                    <input type="text" id="agente" name="agente" value="{{ client.agente }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="call_center" class="block text-sm font-medium text-gray-700 mb-1">Call Center</label>
+                    <input type="text" id="call_center" name="call_center" value="{{ client.call_center }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+                <div>
+                    <label for="referente_aziendale" class="block text-sm font-medium text-gray-700 mb-1">Referente Aziendale</label>
+                    <input type="text" id="referente_aziendale" name="referente_aziendale" value="{{ client.referente_aziendale }}"
+                           class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-shadow">
+                </div>
+            </div>
+
+            <!-- Pulsante di invio -->
+            <div class="flex justify-end mt-6">
+                <button type="submit" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-indigo-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Salva Modifiche
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

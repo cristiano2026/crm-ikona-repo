@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard CRM Agenzia</title>
+    <!-- Caricamento di Tailwind CSS per uno stile moderno e reattivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Impostazioni di base del body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6; /* Sfondo grigio chiaro */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="max-w-4xl w-full mx-auto p-8 md:p-12 bg-white rounded-2xl shadow-xl border border-gray-200">
+        <!-- Sezione Logo e Intestazione -->
+       <!-- Sezione Logo e Intestazione -->
+<div class="mb-10">
+    <!-- Sfondo blu sotto il logo -->
+    <div class="bg-blue-900 py-12">
+        <img src="https://www.ikonadigital.it/logowebbianco.png" alt="Logo Agenzia" class="mx-auto h-32 w-32 object-contain mb-4 rounded-full">
+    </div>
+    <!-- Intestazione sotto il logo -->
+    <div class="text-center mt-4">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800">
+            <!-- Inserisci qui il tuo titolo -->
+            CRM Agency Dashboard
+        </h1>
+    </div>
+</div>
+
+
+        <!-- Sezione Card per le Opzioni -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+            <!-- Card per la Gestione Clienti -->
+            <a href="{{ url_for('clients_list') }}" class="block p-8 bg-blue-900 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-indigo-700">
+                <div class="flex items-center justify-center">
+                    <svg class="h-16 w-16 text-indigo-200" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-center mt-4">Gestione Clienti</h2>
+                <p class="text-center mt-2 text-indigo-100">
+                    Visualizza, aggiungi e gestisci tutti i tuoi clienti.
+                </p>
+            </a>
+
+            <!-- Card per la Gestione Servizi (placeholder per ora) -->
+            <a href="#" class="block p-8 bg-gray-200 text-gray-700 rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-gray-300 cursor-not-allowed">
+                <div class="flex items-center justify-center">
+                    <svg class="h-16 w-16 text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2h-2zM11 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2h-2z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-center mt-4">Gestione Servizi</h2>
+                <p class="text-center mt-2 text-gray-500">
+                    In arrivo... (Non ancora implementato)
+                </p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

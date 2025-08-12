@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %}Potenziali Clienti - IKONA MARKETING CRM{% endblock %}
+
+{% block content %}
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Potenziali Clienti</h1>
+            <a href="{{ url_for('add_prospect') }}" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-lg shadow-md transition duration-300">
+                <i class="fas fa-plus-circle mr-2"></i>Aggiungi Potenziale Cliente
+            </a>
+        </div>
+
+        {% if prospects %}
+            <div class="bg-white shadow-xl rounded-xl overflow-hidden">
+                <table class="min-w-full leading-normal">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-700 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Nome</th>
+                            <th class="py-3 px-6 text-left">Referente</th>
+                            <th class="py-3 px-6 text-left">Email</th>
+                            <th class="py-3 px-6 text-left">Telefono</th>
+                            {# NUOVA INTESTAZIONE COLONNA #}
+                            <th class="py-3 px-6 text-center">Preventivo Grafico</th>
+                            <th class="py-3 px-6 text-center">Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        {% for prospect in prospects %}
+                            <tr class="border-b border-gray-200 hover:bg-gray-100">
+                                <td class="py-3 px-6 text-left whitespace-nowrap">
+                                    <div class="flex items-center">
+                                        <span class="font-medium">{{ prospect.name }}</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    {{ prospect.contact }}
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    {{ prospect.email }}
+                                </td>
+                                <td class="py-3 px-6 text-left">
+                                    {{ prospect.phone }}
+                                </td>
+                                {# NUOVA CELLA PER IL PREVENTIVO GRAFICO #}
+                                <td class="py-3 px-6 text-center">
+                                    {% if prospect.graphic_quote_link %}
+                                        <a href="{{ prospect.graphic_quote_link }}" target="_blank" class="text-blue-600 hover:text-blue-800 transition duration-300" title="Visualizza Preventivo Grafico">
+                                            <i class="fas fa-file-alt text-lg"></i> {# Icona per un file o link #}
+                                        </a>
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                                <td class="py-3 px-6 text-center">
+                                    <div class="flex item-center justify-center space-x-3">
+                                        <a href="{{ url_for('edit_prospect', prospect_id=prospect.id) }}" class="w-8 h-8 rounded-full bg-blue-500 hover:bg-blue-600 text-white flex items-center justify-center transition duration-300" title="Modifica">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="{{ url_for('delete_prospect', prospect_id=prospect.id) }}" class="w-8 h-8 rounded-full bg-red-500 hover:bg-red-600 text-white flex items-center justify-center transition duration-300" title="Elimina" onclick="return confirm('Sei sicuro di voler eliminare questo potenziale cliente?');">
+                                            <i class="fas fa-trash-alt"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div class="bg-white p-6 rounded-xl shadow-md text-center text-gray-600">
+                <p class="text-lg">Nessun potenziale cliente registrato. Inizia aggiungendone uno!</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

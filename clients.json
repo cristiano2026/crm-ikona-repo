@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "nome": "Luppolo e Farina ",
+        "email": "info@luppoloefarina.com",
+        "telefono": "",
+        "progetto": ""
+    },
+    {
+        "id": 2,
+        "nome": "PIZZA PI ",
+        "email": "nomail@babilonart.it",
+        "telefono": "0775123456",
+        "partita_iva": "00000000",
+        "indirizzo": "Campo sportivo Frosinone",
+        "citta": "Frosinone",
+        "cap": "03100",
+        "codice_sdi": "",
+        "agente": "Carlo ",
+        "call_center": "Carmen",
+        "referente_aziendale": "Francesco "
+    }
+]

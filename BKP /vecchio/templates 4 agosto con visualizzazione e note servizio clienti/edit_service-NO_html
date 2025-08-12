@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifica Servizio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-6">Modifica Servizio</h1>
+
+        <!-- Il modulo per la modifica. L'azione sarà aggiornata in app.py -->
+        <form action="{{ url_for('edit_service', service_id=service.id) }}" method="POST">
+            
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 font-semibold mb-2">Nome Servizio</label>
+                <!-- Pre-popoliamo il campo con il nome attuale del servizio -->
+                <input type="text" id="name" name="name" value="{{ service.name }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200">
+            </div>
+            
+            <div class="mb-6">
+                <label for="description" class="block text-gray-700 font-semibold mb-2">Descrizione</label>
+                <!-- Pre-popoliamo la textarea con la descrizione attuale -->
+                <textarea id="description" name="description" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200">{{ service.description }}</textarea>
+            </div>
+
+            <div class="mb-6">
+                <label for="price" class="block text-gray-700 font-semibold mb-2">Prezzo (€)</label>
+                <!-- Pre-popoliamo il campo con il prezzo attuale -->
+                <input type="number" step="0.01" id="price" name="price" value="{{ service.price }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200">
+            </div>
+            
+            <div class="flex justify-between items-center">
+                <!-- Pulsante per salvare le modifiche -->
+                <button type="submit" class="bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-indigo-700 transition-colors duration-200">
+                    <i class="fas fa-save mr-2"></i> Salva Modifiche
+                </button>
+                
+                <!-- Link per annullare e tornare indietro -->
+                <a href="{{ url_for('show_services') }}" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-arrow-left mr-2"></i> Annulla
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

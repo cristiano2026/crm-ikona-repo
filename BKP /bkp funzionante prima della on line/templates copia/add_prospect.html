@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}Aggiungi Potenziale Cliente - IKONA MARKETING CRM{% endblock %}
+
+{% block content %}
+    <div class="max-w-4xl mx-auto px-4 py-8">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800">Aggiungi Potenziale Cliente</h1>
+            <a href="{{ url_for('show_prospects') }}" class="text-blue-600 hover:text-blue-800 transition duration-300 flex items-center">
+                <i class="fas fa-arrow-left mr-2"></i>Torna ai Potenziali Clienti
+            </a>
+        </div>
+
+        <div class="bg-white p-8 rounded-xl shadow-xl">
+            <form action="{{ url_for('add_prospect') }}" method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Nome / Ragione Sociale <span class="text-red-500">*</span></label>
+                        <input type="text" id="name" name="name" value="{{ form_data.name if form_data else '' }}" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div>
+                        <label for="contact" class="block text-gray-700 text-sm font-bold mb-2">Referente Aziendale</label>
+                        <input type="text" id="contact" name="contact" value="{{ form_data.contact if form_data else '' }}" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <input type="email" id="email" name="email" value="{{ form_data.email if form_data else '' }}" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Telefono</label>
+                        <input type="tel" id="phone" name="phone" value="{{ form_data.phone if form_data else '' }}" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="notes" class="block text-gray-700 text-sm font-bold mb-2">Note</label>
+                    <textarea id="notes" name="notes" rows="4" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">{{ form_data.notes if form_data else '' }}</textarea>
+                </div>
+                <div class="mb-6">
+                    <label for="preventivo" class="block text-gray-700 text-sm font-bold mb-2">Preventivo</label>
+                    <textarea id="preventivo" name="preventivo" rows="4" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">{{ form_data.preventivo if form_data else '' }}</textarea>
+                </div>
+                {# NUOVO CAMPO: PREVENTIVO GRAFICO #}
+                <div class="mb-6">
+                    <label for="graphic_quote_link" class="block text-gray-700 text-sm font-bold mb-2">Preventivo Grafico (Link Google Drive)</label>
+                    <input type="url" id="graphic_quote_link" name="graphic_quote_link" value="{{ form_data.graphic_quote_link if form_data else '' }}" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="es. https://drive.google.com/link_al_tuo_preventivo">
+                </div>
+                <div class="flex items-center justify-end">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg shadow-md transition duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                        <i class="fas fa-save mr-2"></i>Salva Potenziale Cliente
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

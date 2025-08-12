@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-xl mt-12">
+    <div class="flex justify-between items-center mb-8">
+        <!-- Corretto l'endpoint da 'show_client_details' a 'show_client' -->
+        <a href="{{ url_for('show_client', client_id=client.id) }}" class="inline-block bg-gray-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105 mb-6">
+            ← Torna a {{ client.name }}
+        </a>
+        <h1 class="text-3xl font-extrabold text-gray-900 text-center">Dettagli del Servizio</h1>
+        <div></div>
+    </div>
+
+    <div class="space-y-6">
+        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold text-gray-700 w-1/3">Nome del servizio:</h2>
+            <span class="text-lg w-2/3">{{ service.name }}</span>
+        </div>
+
+        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold text-gray-700 w-1/3">Prezzo:</h2>
+            <!-- Corretto il nome della variabile da 'client_service.price' a 'client_service.subscribed_price' -->
+            <span class="text-lg w-2/3">{{ client_service.subscribed_price }} €</span>
+        </div>
+
+        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold text-gray-700 w-1/3">Data di inizio:</h2>
+            <span class="text-lg w-2/3">{{ client_service.start_date | date('%d/%m/%Y') }}</span>
+        </div>
+
+        <div class="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold text-gray-700 w-1/3">Data di fine:</h2>
+            <span class="text-lg w-2/3">{{ client_service.end_date | date('%d/%m/%Y') if client_service.end_date }}</span>
+        </div>
+
+        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold text-gray-700 w-1/3">Note:</h2>
+            <p class="text-lg w-2/3 whitespace-pre-wrap">{{ client_service.notes }}</p>
+        </div>
+
+        {% if service.description %}
+        <div class="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg shadow-sm">
+            <h2 class="text-xl font-bold text-gray-700 w-1/3">Descrizione del servizio:</h2>
+            <p class="text-lg w-2/3 whitespace-pre-wrap">{{ service.description }}</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

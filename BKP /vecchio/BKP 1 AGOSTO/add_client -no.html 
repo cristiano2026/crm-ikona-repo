@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aggiungi Nuovo Cliente</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+    <div class="max-w-xl w-full mx-auto p-8 md:p-12 bg-white rounded-2xl shadow-xl border border-gray-200">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-gray-800 text-center mb-6">
+            Aggiungi Nuovo Cliente
+        </h1>
+        <p class="text-center text-gray-600 mb-8">
+            Inserisci i dettagli del nuovo cliente qui sotto.
+        </p>
+
+        <form action="{{ url_for('add_client') }}" method="post">
+            <div class="space-y-6">
+                <!-- Campo Nome -->
+                <div>
+                    <label for="nome" class="block text-lg font-medium text-gray-700">Nome</label>
+                    <input type="text" id="nome" name="nome" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200">
+                </div>
+
+                <!-- Campo Email -->
+                <div>
+                    <label for="email" class="block text-lg font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" required class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200">
+                </div>
+
+                <!-- Campo Telefono -->
+                <div>
+                    <label for="telefono" class="block text-lg font-medium text-gray-700">Telefono</label>
+                    <input type="tel" id="telefono" name="telefono" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200">
+                </div>
+
+                <!-- Campo Progetto -->
+                <div>
+                    <label for="progetto" class="block text-lg font-medium text-gray-700">Progetto</label>
+                    <input type="text" id="progetto" name="progetto" class="mt-1 block w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-200">
+                </div>
+            </div>
+
+            <!-- Pulsanti per Inviare e Annullare -->
+            <div class="mt-8 flex justify-end space-x-4">
+                <a href="{{ url_for('clients_list') }}" class="inline-flex justify-center py-3 px-6 border border-gray-300 shadow-sm text-lg font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-100 transition-colors duration-200">
+                    Annulla
+                </a>
+                <button type="submit" class="inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-lg font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                    Salva Cliente
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

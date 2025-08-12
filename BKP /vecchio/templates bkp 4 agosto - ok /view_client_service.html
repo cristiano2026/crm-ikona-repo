@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto p-8 bg-gray-50 shadow-lg rounded-xl mt-12">
+    <div class="flex justify-between items-center mb-8">
+        <a href="{{ url_for('show_client', client_id=client.id) }}" class="inline-block bg-gray-500 text-white font-semibold py-2 px-6 rounded-full shadow-lg hover:bg-gray-700 transition duration-300 transform hover:scale-105">
+            ← Torna a {{ client.name }}
+        </a>
+        <h1 class="text-3xl font-extrabold text-gray-900 text-center">Dettagli del Servizio</h1>
+        <div class="w-20"></div> {# Placeholder per mantenere la centratura del titolo #}
+    </div>
+
+    {# Sezione per visualizzare i messaggi flash #}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="mb-8">
+                {% for category, message in messages %}
+                    <div class="py-3 px-6 rounded-lg text-lg font-semibold {% if category == 'success' %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <div class="space-y-6">
+        <div class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-700 w-full md:w-1/3">Nome del servizio:</h2>
+            <span class="text-lg text-gray-800 w-full md:w-2/3">{{ service.name }}</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-700 w-full md:w-1/3">Prezzo:</h2>
+            <span class="text-lg text-gray-800 w-full md:w-2/3">{{ client_service.subscribed_price }} €</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-700 w-full md:w-1/3">Data di inizio:</h2>
+            <span class="text-lg text-gray-800 w-full md:w-2/3">{{ client_service.start_date | date('%d/%m/%Y') }}</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-700 w-full md:w-1/3">Data di fine:</h2>
+            <span class="text-lg text-gray-800 w-full md:w-2/3">{{ client_service.end_date | date('%d/%m/%Y') if client_service.end_date }}</span>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-start md:space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-700 w-full md:w-1/3">Note:</h2>
+            <p class="text-lg text-gray-800 w-full md:w-2/3 whitespace-pre-wrap">{{ client_service.notes }}</p>
+        </div>
+
+        {% if service.description %}
+        <div class="flex flex-col md:flex-row items-start md:space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-xl font-bold text-gray-700 w-full md:w-1/3">Descrizione del servizio:</h2>
+            <p class="text-lg text-gray-800 w-full md:w-2/3 whitespace-pre-wrap">{{ service.description }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Sezione per le note mensili -->
+    <div class="bg-white p-8 shadow-lg rounded-xl mt-12 border border-gray-200">
+        <h2 class="text-2xl font-extrabold text-gray-900 mb-6 border-b pb-2">Dettagli Mensili</h2>
+        {% if client_service.monthly_details %}
+        <!-- Il form invia i dati alla rotta 'save_monthly_notes' -->
+        <form action="{{ url_for('save_monthly_notes', client_id=client.id, client_service_id=client_service.id) }}" method="POST">
+            <div class="space-y-6">
+                {% for month_data in client_service.monthly_details %}
+                    <div class="flex flex-col space-y-4 p-4 bg-gray-50 rounded-lg shadow-sm border border-gray-200">
+                        <h3 class="text-xl font-bold text-gray-800 capitalize mb-2">{{ month_data.month_name }} {{ month_data.year }}</h3>
+
+                        <!-- Campo per le ore lavorate -->
+                        <div class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
+                            <label for="hours_{{ month_data.year }}_{{ month_data.month }}" class="font-medium text-gray-600 w-full md:w-1/4">Ore lavorate:</label>
+                            <input type="number" id="hours_{{ month_data.year }}_{{ month_data.month }}" name="hours_{{ month_data.year }}_{{ month_data.month }}" value="{{ month_data.hours_worked | float }}" class="w-full md:w-3/4 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" step="0.5">
+                        </div>
+
+                        <!-- Campo per l'importo pagato -->
+                        <div class="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-4">
+                            <label for="amount_paid_{{ month_data.year }}_{{ month_data.month }}" class="font-medium text-gray-600 w-full md:w-1/4">Importo pagato:</label>
+                            <input type="number" id="amount_paid_{{ month_data.year }}_{{ month_data.month }}" name="amount_paid_{{ month_data.year }}_{{ month_data.month }}" value="{{ month_data.amount_paid | float }}" class="w-full md:w-3/4 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" step="0.01">
+                        </div>
+
+                        <!-- Campo per le note -->
+                        <div class="flex flex-col md:flex-row items-start md:space-x-4">
+                            <label for="note_{{ month_data.year }}_{{ month_data.month }}" class="font-medium text-gray-600 w-full md:w-1/4">Note:</label>
+                            <textarea id="note_{{ month_data.year }}_{{ month_data.month }}" name="note_{{ month_data.year }}_{{ month_data.month }}" rows="4" class="w-full md:w-3/4 p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200">{{ month_data.notes }}</textarea>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="mt-8 text-right">
+                <button type="submit" class="bg-blue-600 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:bg-blue-700 transition duration-300 transform hover:scale-105">Salva Dettagli</button>
+            </div>
+        </form>
+        {% else %}
+        <p class="text-center text-lg text-gray-500">Non sono presenti dettagli mensili per questo servizio.</p>
+        {% endif %}
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto p-8 bg-gray-50 shadow-lg rounded-xl mt-12">
+    <h1 class="text-4xl font-extrabold text-gray-900 mb-8 text-center">Rubrica Clienti</h1>
+    
+    {% if clients %}
+    <div class="overflow-x-auto bg-white rounded-xl shadow-md border border-gray-200">
+        <table class="min-w-full divide-y divide-gray-300">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Nome / Ragione Sociale
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Referente
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-4 text-left text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                        Telefono
+                    </th>
+                    <th scope="col" class="relative px-6 py-4">
+                        <span class="sr-only">Dettagli</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for client in clients %}
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-lg font-medium text-gray-900">
+                        {{ client.name }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-lg text-gray-600">
+                        {{ client.contact }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-lg text-gray-600">
+                        {{ client.email }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-lg text-gray-600">
+                        {{ client.phone }}
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <a href="{{ url_for('show_client', client_id=client.id) }}" class="text-blue-600 hover:text-blue-900 transition duration-300">
+                            Dettagli
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p class="text-center text-lg text-gray-500 mt-8">Nessun cliente trovato nella rubrica.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dettagli Servizio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-lg">
+        <h1 class="text-3xl font-extrabold text-gray-800 mb-4">Dettagli Servizio: {{ service.name }}</h1>
+        <hr class="mb-6">
+        
+        <div class="mb-4">
+            <h2 class="text-lg font-semibold text-gray-700">Nome Servizio</h2>
+            <p class="mt-1 text-gray-900">{{ service.name }}</p>
+        </div>
+        
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-gray-700">Descrizione</h2>
+            <p class="mt-1 text-gray-900">{{ service.description }}</p>
+        </div>
+        
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-gray-700">Prezzo</h2>
+            <p class="mt-1 text-gray-900">€ {{ service.price }}</p>
+        </div>
+        
+        <div class="flex justify-end">
+            <!-- Link per tornare all'elenco dei servizi -->
+            <a href="{{ url_for('show_services') }}" class="text-gray-500 hover:text-gray-700">
+                <i class="fas fa-arrow-left mr-2"></i> Torna all'elenco
+            </a>
+        </div>
+    </div>
+</body>
+</html>

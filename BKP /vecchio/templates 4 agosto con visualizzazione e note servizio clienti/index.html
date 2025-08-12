@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Inter Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- Rettangolo blu per l'intestazione e il logo dell'agenzia -->
+    <div class="bg-blue-900 text-white py-8 mb-8 rounded-b-xl shadow-lg">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-5xl font-extrabold tracking-wider">IKONA MARKETING</h1>
+            <p class="mt-2 text-xl font-light opacity-80">CRM Dashboard</p>
+        </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <!-- Card per i Servizi -->
+            <a href="{{ url_for('show_services') }}" class="block p-8 bg-indigo-600 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-indigo-700">
+                <div class="text-center">
+                    <i class="fas fa-cogs text-5xl mb-4"></i>
+                    <h2 class="text-2xl font-bold">Servizi</h2>
+                    <p class="mt-2 text-sm opacity-80">Gestisci i servizi offerti dall'azienda.</p>
+                </div>
+            </a>
+
+            <!-- Card per i Clienti -->
+            <a href="{{ url_for('show_clients') }}" class="block p-8 bg-blue-900 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-blue-800">
+                <div class="text-center">
+                    <i class="fas fa-users text-5xl mb-4"></i>
+                    <h2 class="text-2xl font-bold">Clienti</h2>
+                    <p class="mt-2 text-sm opacity-80">Visualizza e gestisci i tuoi clienti.</p>
+                </div>
+            </a>
+
+            <!-- Card per gli Appuntamenti -->
+            <a href="{{ url_for('index') }}" class="block p-8 bg-green-600 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-green-700">
+                <div class="text-center">
+                    <i class="fas fa-calendar-alt text-5xl mb-4"></i>
+                    <h2 class="text-2xl font-bold">Appuntamenti</h2>
+                    <p class="mt-2 text-sm opacity-80">Pianifica e gestisci gli appuntamenti.</p>
+                </div>
+            </a>
+
+            <!-- Card per i Contatti -->
+            <a href="{{ url_for('index') }}" class="block p-8 bg-gray-700 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-gray-800">
+                <div class="text-center">
+                    <i class="fas fa-address-book text-5xl mb-4"></i>
+                    <h2 class="text-2xl font-bold">Contatti</h2>
+                    <p class="mt-2 text-sm opacity-80">Gestisci la rubrica dei contatti.</p>
+                </div>
+            </a>
+
+            <!-- Card per i Progetti -->
+            <a href="{{ url_for('index') }}" class="block p-8 bg-purple-600 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-purple-700">
+                <div class="text-center">
+                    <i class="fas fa-project-diagram text-5xl mb-4"></i>
+                    <h2 class="text-2xl font-bold">Progetti</h2>
+                    <p class="mt-2 text-sm opacity-80">Monitora l'avanzamento dei progetti.</p>
+                </div>
+            </a>
+
+            <!-- Card per i Report -->
+            <a href="{{ url_for('index') }}" class="block p-8 bg-teal-600 text-white rounded-xl shadow-lg transition-all duration-300 transform hover:-translate-y-2 hover:shadow-2xl hover:bg-teal-700">
+                <div class="text-center">
+                    <i class="fas fa-chart-line text-5xl mb-4"></i>
+                    <h2 class="text-2xl font-bold">Report</h2>
+                    <p class="mt-2 text-sm opacity-80">Analisi e reportistica avanzata.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
